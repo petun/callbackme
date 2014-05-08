@@ -25,7 +25,12 @@ if (!empty($_POST)) {
 			$text = '<p>Телефон: '.$telephone. '</p>';
 			$text .= '<p>Имя: '.$name. '</p>';
 			$text .= '<p>Комментарий: '.$comment. '</p>';
-			mail($to, $subject,$text);
+
+			// Для отправки HTML-письма должен быть установлен заголовок Content-type
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+
+			mail($to, $subject,$text, $headers);
 
 		}		
 	} else {
