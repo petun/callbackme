@@ -1,6 +1,11 @@
 <?php
 
+//todo перенести валидацию в класс по отправке формы
+
+require_once("SendForm.class.php");
+
 $to = 'petun@air-petr.dlink';
+$from = 'admin@air-petr.dlink';
 $subject  = 'Новый запрос на звонок с сайта';
 
 $message = '';
@@ -11,27 +16,29 @@ if (!empty($_POST)) {
 	$name = $_POST['name'];	
 	$comment = $_POST['comment'];
 
-	if (!empty($telephone) && !empty($name) ) {	
+	// data validation
+	if (!empty($telephone) && !empty($name) ) {
 
 		// simple checks
 		if (!preg_match('/^[\d\s\+\-\(\)]+$/', $telephone)) {
 			$r = false;
-			$message = 'Введите корректный номер телефона';	
+			$message = 'Введите корректный номер телефона';
 		} else {
 			$r = true;
 			$message = 'Успешно отправлено! Мы с Вами свяжемся.';	
 
-			// send mail
-			$text = '<p>Телефон: '.$telephone. '</p>';
-			$text .= '<p>Имя: '.$name. '</p>';
-			$text .= '<p>Комментарий: '.$comment. '</p>';
+			// sending mail
+			$mail = new SendForm($to, $from, $subject);
 
-			// Для отправки HTML-письма должен быть установлен заголовок Content-type
-			$headers  = 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+			$fields = array(
+				'Телефон' => $telephone,
+				'Имя' => $name,
+				'Комментарий' => $comment,
+			);
 
-			mail($to, $subject,$text, $headers);
-
+			$mail->setFields($fields);
+			$mail->setAdditionalText('Новый запрос на обратный звонок с сайта');
+			$mail->send();
 		}		
 	} else {
 		$r = false;
