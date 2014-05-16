@@ -2,10 +2,15 @@ CallMe - форма обратного звонка
 ===============================
 Configuration
 ---
-
-**callme.js[12]**  - change path to mail.php
-
 **mail.php[3]**  - change email
+
+**in HTML code** - change **data-handler** to own script if need it.
+
+You can set you own handlers.  Respons is json with format
+```
+{r:false/true,message:'Error or success message'}
+
+```
 
 Header
 --
@@ -18,14 +23,14 @@ Header
 
 HTML
 -----------
-Код ссылки
+Link Code. **data-target** and **id** of div with class **.modal.fade** is equals.
 ```html
-<a href="#" class="callme" data-toggle="modal" data-target="#callMe">Перезвоните мне</a>
+<a href="#" data-toggle="modal" data-target="#callMe">Call Me Please</a>
 ```
 
-Код самой формы
+Dialog and form code
 ```html
-<div class='pcallme-form'>
+<div class='pcallme-form' data-handler="mail.php">
 <div class="modal fade" id="callMe" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -51,18 +56,13 @@ HTML
 		</form>
       </div>
       <div class="modal-footer"> 
-      	<div class='call-form--status' id='callMeStatus'>
+      	<div class='call-form--status'>
       		
       	</div>       
-        <button type="button" class="btn btn-primary" id='callMeSubmit'>Заказать звонок</button>
+        <button type="button" class="btn btn-primary call-form--submit">Заказать звонок</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div>
 ```
-
-
-Доп. возможности
----------------
-Форму можно переиспользовать, но нужно будет убрать все ID из блоков. 

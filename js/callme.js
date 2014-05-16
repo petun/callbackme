@@ -1,18 +1,23 @@
 $(function(){
-	$('#callMeSubmit').click(function(){		
-		var status = $('#callMeStatus');
-		status.attr('class','call-form--status call-form--status__loading').text('');		
+	$('.call-form--submit').click(function(){
+        // upper div
+        var wrapper = $(this).closest('.pcallme-form');
+        // form handler
+        var handler = $(wrapper).data('handler');
+        /// for status messages
+        var status = $('.call-form--status',wrapper);
 
-		var data = $('.pcallme-form--form').serialize();
+		status.attr('class','call-form--status call-form--status__loading').text('');
+
+		var data = $('.pcallme-form--form',wrapper).serialize();
 
 		$.ajax({
-			url: 'mail.php',
+			url: handler,
 			method: 'post',
 			dataType: 'json',
 			data: data,
 			success:function(r) {
 				//console.log(r);
-				var status = $('#callMeStatus');
 				status.removeClass('call-form--status__loading');
 				if (r.r) {
 					status.addClass('call-form--status__ok');
@@ -22,7 +27,8 @@ $(function(){
 				}
 				status.text(r.message);
 			}
-		})
+		});
+
 		return false;
 	});
 
