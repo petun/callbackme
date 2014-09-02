@@ -15,7 +15,7 @@ $(function(){
 
 		$.ajax({
 			url: handler,
-			method: 'post',
+            type: 'post',
 			dataType: 'json',
 			data: data,
 			success:function(r) {
