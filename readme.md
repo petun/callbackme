@@ -41,6 +41,11 @@ Dialog and form code
       <div class="modal-body">
         <p>Закажите обратный звонок, и мы вам перезвоним в ближайщее время!</p>
         <form role="form" class='pcallme-form--form'>
+            <!-- settings -->
+            <input type="hidden" name="mailto" value="[[++mail]]" />
+            <input type="hidden" name="mailfrom" value="admin@sitename.ru" />
+            <input type="hidden" name="mailsubj" value="Обратнай звонок с сайта" />
+            <!-- .settings -->
 		  <div class="form-group">
 		    <label for="callmePhone">Ваш телефон <span>*</span></label>
 		    <input type="text" name='telephone' class="form-control" id="callmePhone" placeholder="Контактный номер телефона">
