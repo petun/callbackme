@@ -30,7 +30,7 @@ Link Code. **data-target** and **id** of div with class **.modal.fade** is equal
 
 Dialog and form code
 ```html
-<div class='pcallme-form' data-handler="mail.php">
+<div class='pcallme-form' data-handler="callbackme/mail.php" data-mail-to="user@example.com" data-mail-subject="Письмо с сайта">
 <div class="modal fade" id="callMe" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

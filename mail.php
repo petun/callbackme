@@ -4,9 +4,9 @@
 
 require_once("SendForm.class.php");
 
-$to = 'petun@air-petr.dlink';
-$from = 'admin@air-petr.dlink';
-$subject  = 'Новый запрос на звонок с сайта';
+$to = $_POST['mailto'] ?  $_POST['mailto'] : 'petun@air-petr.dlink';
+$subject  = $_POST['mailsubj'] ? $_POST['mailsubj']  : 'Новый запрос на звонок с сайта';
+$from = $_POST['mailfrom'] ? $_POST['mailfrom'] : 'admin@air-petr.dlink';
 
 $message = '';
 $r = false;
